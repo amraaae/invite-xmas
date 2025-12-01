@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Бидний Шинэ Жил 2025</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,25 +18,25 @@
 
     <script>
         tailwind.config = {
-            darkMode: 'class', // Manual toggle
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
                         royal: {
                             400: '#a865e3',
-                            500: '#9349d8', // Main Purple
+                            500: '#9349d8',
                             600: '#7a32bd',
-                            900: '#2d0f4b',
+                            900: '#2d0f4b'
                         },
                         gold: {
                             100: '#F9F1D8',
                             300: '#EAD69E',
-                            500: '#D4AF37',
+                            500: '#D4AF37'
                         },
                         dark: {
                             950: '#020005',
                             900: '#0a0510',
-                            800: '#150a20',
+                            800: '#150a20'
                         }
                     },
                     fontFamily: {
@@ -62,8 +62,9 @@
             color: #f8fafc;
             overflow-x: hidden;
             transition: background-color 0.5s ease, color 0.5s ease;
+            -webkit-tap-highlight-color: transparent;
         }
-        /* --- LIGHT MODE OVERRIDES --- */
+        /* LIGHT MODE */
         
         body.light-mode {
             background-color: #f8f7f5;
@@ -87,20 +88,21 @@
         body.light-mode footer h2 {
             color: #1a1a1a !important;
         }
-        /* Invert map filter in light mode to look normal */
         
         body.light-mode .map-filter {
             filter: none !important;
         }
-        /* Adjust glassmorphism for light mode */
         
         body.light-mode .backdrop-blur-sm,
         body.light-mode .backdrop-blur-md {
             background-color: rgba(255, 255, 255, 0.6) !important;
             border-color: rgba(147, 73, 216, 0.2) !important;
         }
-        /* --- END LIGHT MODE --- */
-        /* Hero Canvas */
+        
+        body.light-mode .timeline-line-bg {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        /* UTIL */
         
         #hero-canvas {
             position: absolute;
@@ -109,23 +111,19 @@
             width: 100%;
             height: 100%;
             z-index: 10;
-            /* Above image, below content */
             pointer-events: none;
             filter: blur(1px);
         }
-        /* Gallery Masking */
         
         .gallery-mask {
             mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
             -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
         }
-        /* Map Filter (Dark Default) */
         
         .map-filter {
             filter: invert(100%) hue-rotate(240deg) contrast(90%) brightness(85%);
             transition: filter 0.5s ease;
         }
-        /* TIMELINE LINE STYLES */
         
         .timeline-line-bg,
         .timeline-line-fill {
@@ -139,10 +137,6 @@
         
         .timeline-line-bg {
             background: rgba(255, 255, 255, 0.1);
-        }
-        
-        body.light-mode .timeline-line-bg {
-            background: rgba(0, 0, 0, 0.1);
         }
         
         .timeline-line-fill {
@@ -165,45 +159,31 @@
 <body class="antialiased selection:bg-royal-500 selection:text-white transition-colors duration-500">
 
     <section class="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden z-10">
-
         <div class="absolute inset-0 z-0">
-            <img src="./assets/background.jpg" class="w-full h-full object-cover blur-[5px] scale-110 opacity-50 transition-opacity duration-500" alt="New Year Background">
-
+            <img src="./assets/background.jpg" class="w-full h-full object-cover blur-[5px] scale-110 opacity-50" alt="New Year Background">
             <div class="absolute inset-0 bg-gradient-to-b from-[#020005]/90 via-[#020005]/60 to-[#020005] mix-blend-multiply"></div>
         </div>
-
         <canvas id="hero-canvas"></canvas>
 
         <div class="relative z-20 text-center px-6 max-w-6xl mx-auto">
-            <div class="mb-8 opacity-0 reveal-hero animate-pulse">
+            <div class="mb-8 opacity-0 reveal-hero">
                 <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-royal-500/30 bg-royal-900/30 backdrop-blur-sm shadow-lg">
                     <span class="w-2 h-2 rounded-full bg-royal-500 animate-pulse"></span>
                     <span class="text-gray-300 text-xs tracking-[0.3em] uppercase font-sans font-semibold">2024 - 2025</span>
                 </div>
             </div>
-
-            <h1 class="text-4xl md:text-6xl lg:text-8xl font-display font-bold text-white mb-4 opacity-0 reveal-hero leading-none tracking-tight drop-shadow-[0_0_25px_rgba(147,73,216,0.6)]">
-                БИДНИЙ ШИНЭ ЖИЛ
-            </h1>
-            <h2 class="text-4xl md:text-6xl font-serif italic text-royal-500 mb-8 opacity-0 reveal-hero drop-shadow-md">
-                Celebration 2025
-            </h2>
-
-            <p class="text-gray-200 text-lg md:text-xl font-light mb-12 max-w-2xl mx-auto opacity-0 reveal-hero drop-shadow-sm font-medium">
-                Гайхамшигт мөчүүд, шинэ эхлэл, мартагдашгүй дурсамжийг хамтдаа
-            </p>
-
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-white mb-4 opacity-0 reveal-hero leading-none tracking-tight drop-shadow-[0_0_25px_rgba(147,73,216,0.6)]">БИДНИЙ ШИНЭ ЖИЛ</h1>
+            <h2 class="text-4xl md:text-6xl font-serif italic text-royal-500 mb-8 opacity-0 reveal-hero drop-shadow-md">Celebration 2025</h2>
+            <p class="text-gray-200 text-lg md:text-xl font-light mb-12 max-w-2xl mx-auto opacity-0 reveal-hero drop-shadow-sm font-medium">Гайхамшигт мөчүүд, шинэ эхлэл, мартагдашгүй дурсамжийг хамтдаа</p>
             <div id="countdown" class="flex flex-wrap justify-center gap-8 md:gap-12 opacity-0 reveal-hero"></div>
         </div>
 
-        <div class="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-30 opacity-0 reveal-hero ">
-            <a href="#invitation" class="group relative inline-flex items-center justify-center animate-bounce">
+        <div class="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-30 opacity-0 reveal-hero">
+            <a href="#invitation" class="group relative inline-flex items-center justify-center">
                 <div class="absolute transition-all duration-200 rounded-full -inset-1 bg-gradient-to-r from-royal-600 to-royal-400 blur-lg opacity-40 group-hover:opacity-70 group-hover:duration-200 animate-tilt"></div>
                 <button class="relative inline-flex items-center gap-3 px-10 py-4 bg-royal-500 hover:bg-royal-400 text-white font-bold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(147,73,216,0.4)] hover:shadow-[0_0_40px_rgba(147,73,216,0.6)] hover:-translate-y-1">
                     <span class="tracking-[0.2em] uppercase text-sm font-sans">Урилга үзэх</span>
-                    <svg class="w-5 h-5 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
-                    </svg>
+                    <svg class="w-5 h-5 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
                 </button>
             </a>
         </div>
@@ -211,7 +191,6 @@
 
     <section id="invitation" class="py-32 px-4 relative z-10 transition-colors duration-500">
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-96 bg-royal-900/30 blur-[100px] rounded-full pointer-events-none"></div>
-
         <div class="max-w-4xl mx-auto relative z-10 gs-reveal">
             <div class="flex flex-col items-center text-center">
                 <div class="flex flex-col items-center gap-4 mb-10">
@@ -222,9 +201,7 @@
                         <div class="w-2 h-2 bg-gold-500 rotate-45"></div>
                     </div>
                 </div>
-
                 <h3 class="text-royal-400 font-sans text-xs tracking-[0.6em] uppercase mb-6 opacity-80">Урилга</h3>
-
                 <h2 class="text-4xl md:text-6xl font-serif text-white mb-10 leading-tight drop-shadow-lg">
                     Эрхэм хүндэт <br>
                     <span class="italic text-gold-300 font-medium relative inline-block px-4 mt-2">
@@ -232,19 +209,15 @@
                     <span class="relative">Зочид танаа</span>
                     </span>
                 </h2>
-
                 <div class="relative bg-white/5 border-t border-l border-white/5 backdrop-blur-sm p-10 md:p-14 rounded-[2rem] shadow-2xl max-w-3xl w-full transition-colors duration-500">
-                    <span class="absolute top-0 left-6 text-8xl text-gold-500/20 font-serif leading-none -translate-y-6">&ldquo;</span>
-
+                    <span class="absolute top-0 left-6 text-8xl text-gold-500/20 font-serif leading-none -translate-y-6">“</span>
                     <p class="relative z-10 text-gray-300 text-lg md:text-xl font-light leading-relaxed font-sans text-center transition-colors duration-500">
                         Цаг хугацааны хүрд эргэж, дахин нэгэн шинэ он айлчлан ирлээ. Энэхүү баярт мөчийг бид халуун дулаан уур амьсгал, инээд хөөр, гэрэл гэгээгээр дүүрэн өнгөрүүлэхийг зорьж байна.
                         <br><br>
                         <span class="text-white font-medium transition-colors duration-500">Таныг бидний баярт хүрэлцэн ирэхийг урьж байна.</span>
                     </p>
-
-                    <span class="absolute bottom-0 right-6 text-8xl text-gold-500/20 font-serif leading-none translate-y-10">&rdquo;</span>
+                    <span class="absolute bottom-0 right-6 text-8xl text-gold-500/20 font-serif leading-none translate-y-10">”</span>
                 </div>
-
                 <div class="mt-12 opacity-70 hover:opacity-100 transition duration-500">
                     <p class="text-xs text-royal-300 uppercase tracking-widest mb-2">Зохион байгуулагчид</p>
                     <div class="w-16 h-[1px] bg-gold-500/50 mx-auto"></div>
@@ -274,9 +247,14 @@
         </div>
     </section>
 
-    <section class="py-24 px-4 bg-dark-950 relative z-10 transition-colors duration-500">
-        <div class="max-w-5xl mx-auto">
-            <h2 class="text-4xl md:text-5xl font-serif text-center text-white mb-20 gs-reveal transition-colors duration-500">Хөтөлбөр</h2>
+    <section class="py-24 px-4 bg-dark-950 relative z-10 transition-colors duration-500 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="./assets/background.jpg" class="w-full h-full object-cover opacity-30 blur-[2px]" alt="Program Background">
+            <div class="absolute inset-0 bg-gradient-to-b from-[#020005] via-[#020005]/80 to-[#020005]"></div>
+        </div>
+
+        <div class="max-w-5xl mx-auto relative z-10">
+            <h2 class="text-4xl md:text-5xl font-serif text-center text-white mb-20 gs-reveal transition-colors duration-500 drop-shadow-lg">Хөтөлбөр</h2>
             <div class="relative pb-20" id="program-container">
                 <div class="timeline-line-bg"></div>
                 <div class="timeline-line-fill"></div>
@@ -293,22 +271,16 @@
                             <span class="w-8 h-[1px] bg-royal-500"></span> Байршил
                         </h3>
                         <h2 class="text-4xl font-display text-white mb-4 transition-colors duration-500">House</h2>
-                        <p class="text-gray-400 font-light leading-relaxed transition-colors duration-500">
-                            Улаанбаатар хот, Дүүрэг<br>
-                        </p>
+                        <p class="text-gray-400 font-light leading-relaxed transition-colors duration-500">Улаанбаатар хот, Дүүрэг<br></p>
                     </div>
                     <div class="mb-10">
                         <h3 class="flex items-center gap-3 text-royal-400 uppercase tracking-widest text-sm mb-4">
                             <span class="w-8 h-[1px] bg-royal-500"></span> Dress Code
                         </h3>
                         <h2 class="text-3xl font-display text-white mb-2 transition-colors duration-500">Creative Black Tie</h2>
-                        <p class="text-gray-400 font-light transition-colors duration-500">
-                            Өнгө: Хар, Цагаан, Ягаан (Purple), Алтлаг
-                        </p>
+                        <p class="text-gray-400 font-light transition-colors duration-500">Өнгө: Хар, Цагаан, Ягаан (Purple), Алтлаг</p>
                     </div>
-                    <button class="px-8 py-3 border border-royal-500 text-royal-500 hover:bg-royal-500 hover:text-white transition duration-300 rounded uppercase text-sm tracking-widest">
-                        Байршил харах
-                    </button>
+                    <button class="px-8 py-3 border border-royal-500 text-royal-500 hover:bg-royal-500 hover:text-white transition duration-300 rounded uppercase text-sm tracking-widest">Байршил харах</button>
                 </div>
                 <div class="order-1 lg:order-2 gs-reveal h-96 relative rounded-2xl overflow-hidden shadow-neon border border-royal-500/30 group">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2673.355153283737!2d106.9157293761376!3d47.915833971219985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5d96924510065091%3A0xb3a0595295c33022!2sShangri-La%20Ulaanbaatar!5e0!3m2!1sen!2smn!4v1701234567890!5m2!1sen!2smn"
@@ -323,236 +295,233 @@
 
     <footer class="py-10 bg-black text-center border-t border-royal-900 relative z-10 transition-colors duration-500">
         <h2 class="text-white text-2xl font-display font-bold mb-2 tracking-widest transition-colors duration-500">Бидний Шинэ Жил 2025</h2>
-        <p class="text-gray-600 text-xs uppercase tracking-widest">Created for amraaae.</p>
+        <p class="text-gray-600 text-xs uppercase tracking-widest">Created for celebration.</p>
     </footer>
 
     <script>
-        // 1. COUNTDOWN
-        const targetDate = new Date("December 20, 2025 18:00:00").getTime();
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
 
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            // 1. COUNTDOWN
+            // IMPORTANT: Date set to December 20, 2024 (Current year) or 2025 as needed.
+            // Using 2024 since current date is usually late 2024 for these events.
+            const targetDate = new Date("December 20, 2025 18:00:00").getTime();
 
-            const box = (val, label) => `
-                <div class="flex flex-col items-center mx-2 md:mx-4 group">
-                    <div class="relative bg-royal-900/40 border border-royal-500/30 backdrop-blur-md rounded-xl p-4 w-20 md:w-24 h-20 md:h-24 flex items-center justify-center shadow-[0_0_15px_rgba(147,73,216,0.15)] group-hover:shadow-[0_0_25px_rgba(147,73,216,0.4)] transition-all duration-300 transform group-hover:-translate-y-1">
-                        <span class="text-3xl md:text-5xl font-display font-bold text-white group-hover:text-gold-300 transition-colors">
-                            ${val < 10 ? '0'+val : val}
-                        </span>
-                        <div class="absolute top-0 left-0 w-2 h-2 border-t border-l border-royal-500 opacity-50"></div>
-                        <div class="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-royal-500 opacity-50"></div>
-                    </div>
-                    <span class="text-[10px] md:text-xs uppercase text-royal-400 tracking-[0.2em] mt-3 font-semibold group-hover:text-white transition-colors text-shadow-sm">
-                        ${label}
-                    </span>
-                </div>`;
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
 
-            const container = document.getElementById("countdown");
-            if (distance > 0) {
-                container.innerHTML = `
-                    <div class="flex items-start justify-center">
-                        ${box(days, "Өдөр")}
-                        <div class="text-2xl md:text-4xl text-royal-500/50 pt-6 font-light animate-pulse">:</div>
-                        ${box(hours, "Цаг")}
-                        <div class="text-2xl md:text-4xl text-royal-500/50 pt-6 font-light animate-pulse">:</div>
-                        ${box(minutes, "Минут")}
-                        <div class="text-2xl md:text-4xl text-royal-500/50 pt-6 font-light animate-pulse">:</div>
-                        ${box(seconds, "Секунд")}
+                // Safety check if date passed
+                if (distance < 0) {
+                    const container = document.getElementById("countdown");
+                    if (container) container.innerHTML = `<div class="text-center animate-bounce"><h2 class="text-3xl md:text-5xl font-display text-gold-500">Шинэ Жилийн Мэнд!</h2></div>`;
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                const box = (val, label) => `
+                    <div class="flex flex-col items-center mx-2 md:mx-4 group">
+                        <div class="relative bg-royal-900/40 border border-royal-500/30 backdrop-blur-md rounded-xl p-4 w-20 md:w-24 h-20 md:h-24 flex items-center justify-center shadow-[0_0_15px_rgba(147,73,216,0.15)] group-hover:shadow-[0_0_25px_rgba(147,73,216,0.4)] transition-all duration-300 transform group-hover:-translate-y-1">
+                            <span class="text-3xl md:text-5xl font-display font-bold text-white group-hover:text-gold-300 transition-colors">${val < 10 ? '0'+val : val}</span>
+                            <div class="absolute top-0 left-0 w-2 h-2 border-t border-l border-royal-500 opacity-50"></div>
+                            <div class="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-royal-500 opacity-50"></div>
+                        </div>
+                        <span class="text-[10px] md:text-xs uppercase text-royal-400 tracking-[0.2em] mt-3 font-semibold group-hover:text-white transition-colors text-shadow-sm">${label}</span>
                     </div>`;
-            } else {
-                container.innerHTML = `<div class="text-center animate-bounce"><h2 class="text-3xl md:text-5xl font-display text-gold-500">Шинэ Жилийн Мэнд!</h2></div>`;
+
+                const container = document.getElementById("countdown");
+                if (container) {
+                    container.innerHTML = `<div class="flex items-start justify-center">${box(days, "Өдөр")}<div class="text-2xl md:text-4xl text-royal-500/50 pt-6 font-light animate-pulse">:</div>${box(hours, "Цаг")}<div class="text-2xl md:text-4xl text-royal-500/50 pt-6 font-light animate-pulse">:</div>${box(minutes, "Минут")}<div class="text-2xl md:text-4xl text-royal-500/50 pt-6 font-light animate-pulse">:</div>${box(seconds, "Секунд")}</div>`;
+                }
             }
-        }
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
+            setInterval(updateCountdown, 1000);
+            updateCountdown();
 
-        // 2. HERO ANIMATIONS (Waves & Reveal)
-        const canvas = document.getElementById('hero-canvas');
-        if (canvas) {
-            const ctx = canvas.getContext('2d');
-            let width, height;
+            // 2. HERO ANIMATIONS
+            const canvas = document.getElementById('hero-canvas');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                let width, height;
+                const waves = [{
+                    yOffset: 0.7,
+                    color: 'rgba(147, 73, 216, 0.15)',
+                    speed: 0.003,
+                    amplitude: 80,
+                    frequency: 0.002,
+                    phase: 0
+                }, {
+                    yOffset: 0.75,
+                    color: 'rgba(122, 50, 189, 0.25)',
+                    speed: 0.005,
+                    amplitude: 100,
+                    frequency: 0.003,
+                    phase: 2
+                }, {
+                    yOffset: 0.8,
+                    color: 'rgba(100, 40, 160, 0.2)',
+                    speed: 0.007,
+                    amplitude: 60,
+                    frequency: 0.004,
+                    phase: 4
+                }, {
+                    yOffset: 0.85,
+                    color: 'rgba(212, 175, 55, 0.05)',
+                    speed: 0.002,
+                    amplitude: 120,
+                    frequency: 0.002,
+                    phase: 1
+                }];
 
-            const waves = [{
-                yOffset: 0.7,
-                color: 'rgba(147, 73, 216, 0.15)',
-                speed: 0.003,
-                amplitude: 80,
-                frequency: 0.002,
-                phase: 0
+                function resize() {
+                    width = canvas.width = window.innerWidth;
+                    height = canvas.height = window.innerHeight;
+                }
+                window.addEventListener('resize', resize);
+                resize();
+
+                function animateCanvas() {
+                    ctx.clearRect(0, 0, width, height);
+                    waves.forEach(wave => {
+                        ctx.beginPath();
+                        ctx.moveTo(0, height);
+                        for (let x = 0; x <= width; x += 5) {
+                            const y1 = Math.sin(x * wave.frequency + wave.phase);
+                            const y2 = Math.sin(x * wave.frequency * 0.5 + wave.phase * 1.5);
+                            const y = height * wave.yOffset + wave.amplitude * (y1 + y2 * 0.5);
+                            ctx.lineTo(x, y);
+                        }
+                        ctx.lineTo(width, height);
+                        ctx.closePath();
+                        ctx.fillStyle = wave.color;
+                        ctx.fill();
+                        wave.phase += wave.speed;
+                    });
+                    requestAnimationFrame(animateCanvas);
+                }
+                animateCanvas();
+            }
+
+            // 3. PROGRAM DATA (Updated List)
+            const programData = [{
+                title: "Ширээ Засах, Бэлдэх",
+                desc: "Баярын ширээгээ хамтдаа бэлдэх"
             }, {
-                yOffset: 0.75,
-                color: 'rgba(122, 50, 189, 0.25)',
-                speed: 0.005,
-                amplitude: 100,
-                frequency: 0.003,
-                phase: 2
+                title: "Гацуур Чимэх",
+                desc: "Баярын уур амьсгал бүрдүүлэх"
             }, {
-                yOffset: 0.8,
-                color: 'rgba(100, 40, 160, 0.2)',
-                speed: 0.007,
-                amplitude: 60,
-                frequency: 0.004,
-                phase: 4
+                title: "Хоол Захиалга & Мах Шарах",
+                desc: "Амтат гуя болон тусгай зоог"
             }, {
-                yOffset: 0.85,
-                color: 'rgba(212, 175, 55, 0.05)',
-                speed: 0.002,
-                amplitude: 120,
-                frequency: 0.002,
-                phase: 1
+                title: "Өвлийн Өвгөн",
+                desc: "Бэлэг гардуулах баярт мөч"
+            }, {
+                title: "Сугалаа Явуулах",
+                desc: "Азтан шалгаруулах хөгжөөнт цаг"
+            }, {
+                title: "Караокэ & Салют",
+                desc: "Дуу хуур, ёслолын буудлага"
             }];
 
-            function resize() {
-                width = canvas.width = window.innerWidth;
-                height = canvas.height = window.innerHeight;
-            }
-            window.addEventListener('resize', resize);
-            resize();
-
-            function animateCanvas() {
-                ctx.clearRect(0, 0, width, height);
-                waves.forEach(wave => {
-                    ctx.beginPath();
-                    ctx.moveTo(0, height);
-                    for (let x = 0; x <= width; x += 5) {
-                        const y1 = Math.sin(x * wave.frequency + wave.phase);
-                        const y2 = Math.sin(x * wave.frequency * 0.5 + wave.phase * 1.5);
-                        const y = height * wave.yOffset + wave.amplitude * (y1 + y2 * 0.5);
-                        ctx.lineTo(x, y);
-                    }
-                    ctx.lineTo(width, height);
-                    ctx.closePath();
-                    ctx.fillStyle = wave.color;
-                    ctx.fill();
-                    wave.phase += wave.speed;
+            const programContainer = document.getElementById('program-container');
+            if (programContainer) {
+                programData.forEach((item, index) => {
+                    const isLeft = index % 2 === 0;
+                    let desktopClasses = isLeft ? "md:flex-row md:text-right" : "md:flex-row-reverse md:text-left";
+                    let contentClasses = isLeft ? "md:pr-16 md:pl-0" : "md:pl-16 md:pr-0";
+                    const html = `
+                        <div class="relative flex items-center mb-16 w-full gs-program-item opacity-0 ${desktopClasses}">
+                            <div class="w-full md:w-1/2 pl-16 md:pl-0 ${contentClasses} py-2">
+                                <h3 class="text-royal-400 text-2xl md:text-3xl font-serif mb-2 font-bold">${item.title}</h3>
+                                <p class="text-gray-400 font-light text-sm md:text-base leading-relaxed transition-colors duration-500">${item.desc}</p>
+                            </div>
+                            <div class="hidden md:block w-1/2"></div>
+                            <div class="absolute w-4 h-4 bg-[#020005] border-2 border-royal-500 rounded-full z-10 shadow-[0_0_10px_#9349d8] left-[29px] md:left-1/2 transform md:-translate-x-1/2"></div>
+                        </div>`;
+                    programContainer.innerHTML += html;
                 });
-                requestAnimationFrame(animateCanvas);
             }
-            animateCanvas();
-        }
 
-        // 3. PROGRAM DATA (ZigZag Logic)
-        const programData = [{
-            title: "Угталт & Улаан Хивс",
-            desc: "Зочдыг угтан авах, зураг татуулах"
-        }, {
-            title: "Баярын Нээлт",
-            desc: "Нээлтийн үг, тусгай үзүүлбэр"
-        }, {
-            title: "Хүндэтгэлийн Зоог",
-            desc: "Амтат хоол, хөнгөн хөгжим"
-        }, {
-            title: "Амьд Хөгжим",
-            desc: "Шилдэг хамтлагуудын тоглолт"
-        }, {
-            title: "Хөгжөөнт Хөтөлбөр",
-            desc: "Азтан шалгаруулах, тэмцээнүүд"
-        }, {
-            title: "Оргилуун Дарс",
-            desc: "Он солигдох торгон мөч"
-        }];
-
-        const programContainer = document.getElementById('program-container');
-        if (programContainer) {
-            programData.forEach((item, index) => {
-                const isLeft = index % 2 === 0;
-                let desktopClasses = isLeft ? "md:flex-row md:text-right" : "md:flex-row-reverse md:text-left";
-                let contentClasses = isLeft ? "md:pr-16 md:pl-0" : "md:pl-16 md:pr-0";
-
-                const html = `
-                    <div class="relative flex items-center mb-16 w-full gs-program-item opacity-0 ${desktopClasses}">
-                        <div class="w-full md:w-1/2 pl-16 md:pl-0 ${contentClasses} py-2">
-                            <h3 class="text-royal-400 text-2xl md:text-3xl font-serif mb-2 font-bold">${item.title}</h3>
-                            <p class="text-gray-400 font-light text-sm md:text-base leading-relaxed transition-colors duration-500">${item.desc}</p>
-                        </div>
-                        <div class="hidden md:block w-1/2"></div>
-                        <div class="absolute w-4 h-4 bg-[#020005] border-2 border-royal-500 rounded-full z-10 shadow-[0_0_10px_#9349d8] left-[29px] md:left-1/2 transform md:-translate-x-1/2"></div>
-                    </div>
-                `;
-                programContainer.innerHTML += html;
-            });
-        }
-
-        // 4. GSAP ANIMATIONS
-        gsap.registerPlugin(ScrollTrigger);
-        gsap.to(".reveal-hero", {
-            y: 0,
-            opacity: 1,
-            duration: 1.5,
-            stagger: 0.2,
-            ease: "power3.out",
-            delay: 0.5
-        });
-
-        document.querySelectorAll(".gs-reveal").forEach(el => {
-            gsap.fromTo(el, {
-                y: 50,
-                opacity: 0
-            }, {
-                scrollTrigger: {
-                    trigger: el,
-                    start: "top 85%"
-                },
+            // 4. SCROLL ANIMATIONS (Triggered after DOM ready)
+            gsap.to(".reveal-hero", {
                 y: 0,
                 opacity: 1,
-                duration: 1,
-                ease: "power2.out"
+                duration: 1.5,
+                stagger: 0.2,
+                ease: "power3.out",
+                delay: 0.5
             });
-        });
-
-        gsap.to(".timeline-line-fill", {
-            scrollTrigger: {
-                trigger: "#program-container",
-                start: "top 60%",
-                end: "bottom 80%",
-                scrub: 0.5
-            },
-            height: "100%",
-            ease: "none"
-        });
-
-        gsap.utils.toArray(".gs-program-item").forEach(item => {
-            gsap.fromTo(item, {
-                opacity: 0,
-                scale: 0.9
-            }, {
+            document.querySelectorAll(".gs-reveal").forEach(el => {
+                gsap.fromTo(el, {
+                    y: 50,
+                    opacity: 0
+                }, {
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 85%"
+                    },
+                    y: 0,
+                    opacity: 1,
+                    duration: 1,
+                    ease: "power2.out"
+                });
+            });
+            gsap.to(".timeline-line-fill", {
                 scrollTrigger: {
-                    trigger: item,
-                    start: "top 85%"
+                    trigger: "#program-container",
+                    start: "top 60%",
+                    end: "bottom 80%",
+                    scrub: 0.5
                 },
-                opacity: 1,
-                scale: 1,
-                duration: 0.6,
-                ease: "back.out(1.5)"
+                height: "100%",
+                ease: "none"
+            });
+            gsap.utils.toArray(".gs-program-item").forEach(item => {
+                gsap.fromTo(item, {
+                    opacity: 0,
+                    scale: 0.9
+                }, {
+                    scrollTrigger: {
+                        trigger: item,
+                        start: "top 85%"
+                    },
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.6,
+                    ease: "back.out(1.5)"
+                });
+            });
+
+            // 5. GALLERY SCROLL
+            const row1 = document.getElementById("gallery-row-1");
+            const row2 = document.getElementById("gallery-row-2");
+            if (row1 && row2) {
+                row1.innerHTML += row1.innerHTML + row1.innerHTML;
+                row2.innerHTML += row2.innerHTML + row2.innerHTML;
+                gsap.to(row1, {
+                    xPercent: -33.33,
+                    ease: "none",
+                    duration: 30,
+                    repeat: -1
+                });
+                gsap.fromTo(row2, {
+                    xPercent: -33.33
+                }, {
+                    xPercent: 0,
+                    ease: "none",
+                    duration: 30,
+                    repeat: -1
+                });
+            }
+
+            // Force refresh ScrollTrigger after a slight delay to handle mobile address bar resizing
+            window.addEventListener("load", () => {
+                ScrollTrigger.refresh();
             });
         });
-
-        // 5. GALLERY SCROLL
-        const row1 = document.getElementById("gallery-row-1");
-        const row2 = document.getElementById("gallery-row-2");
-        if (row1 && row2) {
-            row1.innerHTML += row1.innerHTML + row1.innerHTML;
-            row2.innerHTML += row2.innerHTML + row2.innerHTML;
-            gsap.to(row1, {
-                xPercent: -33.33,
-                ease: "none",
-                duration: 30,
-                repeat: -1
-            });
-            gsap.fromTo(row2, {
-                xPercent: -33.33
-            }, {
-                xPercent: 0,
-                ease: "none",
-                duration: 30,
-                repeat: -1
-            });
-        }
     </script>
 </body>
 
