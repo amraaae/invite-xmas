@@ -157,23 +157,26 @@
 </head>
 
 <body class="antialiased selection:bg-royal-500 selection:text-white transition-colors duration-500">
+    <div id="snow-container" class="fixed inset-0 pointer-events-none z-50 overflow-hidden"></div>
 
-    <section class="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden z-10">
+    <section class="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden z-10 pb-32 md:pb-0">
+
         <div class="absolute inset-0 z-0">
             <img src="./assets/background.jpg" class="w-full h-full object-cover blur-[5px] scale-110 opacity-50" alt="New Year Background">
             <div class="absolute inset-0 bg-gradient-to-b from-[#020005]/90 via-[#020005]/60 to-[#020005] mix-blend-multiply"></div>
         </div>
         <canvas id="hero-canvas"></canvas>
 
-        <div class="relative z-20 text-center px-4 sm:px-6 max-w-6xl mx-auto w-full">
-            <div class="mb-6 md:mb-8 opacity-0 reveal-hero">
+        <div class="relative z-20 text-center px-6 max-w-4xl mx-auto w-full flex flex-col items-center justify-center h-full">
+
+            <div class="mb-6 opacity-0 reveal-hero shrink-0">
                 <div class="inline-flex items-center gap-3 px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-royal-500/30 bg-royal-900/30 backdrop-blur-sm shadow-lg">
                     <span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-royal-500 animate-pulse"></span>
                     <span class="text-gray-300 text-[10px] md:text-xs tracking-[0.3em] uppercase font-sans font-semibold">2024 - 2025</span>
                 </div>
             </div>
 
-            <h1 class="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-bold text-white mb-2 md:mb-4 opacity-0 reveal-hero leading-tight tracking-tight drop-shadow-[0_0_25px_rgba(147,73,216,0.6)] break-words">
+            <h1 class="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-bold text-white mb-2 md:mb-4 opacity-0 reveal-hero leading-tight tracking-tight drop-shadow-[0_0_25px_rgba(147,73,216,0.6)]">
                 БИДНИЙ ШИНЭ ЖИЛ
             </h1>
 
@@ -181,14 +184,14 @@
                 Celebration 2025
             </h2>
 
-            <p class="text-gray-200 text-sm sm:text-lg md:text-xl font-light mb-8 md:mb-12 max-w-2xl mx-auto opacity-0 reveal-hero drop-shadow-sm font-medium px-2">
+            <p class="text-gray-200 text-sm sm:text-lg md:text-xl font-light mb-8 md:mb-12 max-w-lg mx-auto opacity-0 reveal-hero drop-shadow-sm font-medium leading-relaxed">
                 Гайхамшигт мөчүүд, шинэ эхлэл, мартагдашгүй дурсамжийг хамтдаа
             </p>
 
-            <div id="countdown" class="flex flex-wrap justify-center gap-4 md:gap-8 opacity-0 reveal-hero"></div>
+            <div id="countdown" class="flex flex-wrap justify-center gap-4 md:gap-8 opacity-0 reveal-hero shrink-0"></div>
         </div>
 
-        <div class="absolute bottom-10 md:bottom-16 left-1/2 transform -translate-x-1/2 z-30 opacity-0 reveal-hero w-full text-center">
+        <div class="absolute bottom-12 md:bottom-16 left-1/2 transform -translate-x-1/2 z-30 opacity-0 reveal-hero w-full text-center">
             <a href="#invitation" class="group relative inline-flex items-center justify-center">
                 <div class="absolute transition-all duration-200 rounded-full -inset-1 bg-gradient-to-r from-royal-600 to-royal-400 blur-lg opacity-40 group-hover:opacity-70 group-hover:duration-200 animate-tilt"></div>
                 <button class="relative inline-flex items-center gap-3 px-8 py-3 md:px-10 md:py-4 bg-royal-500 hover:bg-royal-400 text-white font-bold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(147,73,216,0.4)] hover:shadow-[0_0_40px_rgba(147,73,216,0.6)] hover:-translate-y-1">
@@ -311,6 +314,54 @@
     <script>
         document.addEventListener("DOMContentLoaded", (event) => {
             gsap.registerPlugin(ScrollTrigger);
+
+
+            // 6. SNOW EFFECT
+            function createSnow() {
+                const container = document.getElementById('snow-container');
+                if (!container) return;
+
+                const flakeCount = 60; // Цасны ширхэгийн тоо (Утас гацахгүй байх хэмжээ)
+
+                for (let i = 0; i < flakeCount; i++) {
+                    const flake = document.createElement('div');
+                    // Цасны загвар: Бөөрөнхий, цагаан, бүдэг (blur)
+                    flake.className = 'absolute bg-white rounded-full opacity-80 blur-[1px]';
+
+                    // Санамсаргүй хэмжээ (2px - 5px)
+                    const size = Math.random() * 3 + 2;
+
+                    // Эхлэх байрлал (Санамсаргүй)
+                    gsap.set(flake, {
+                        x: Math.random() * window.innerWidth,
+                        y: Math.random() * window.innerHeight,
+                        width: size,
+                        height: size,
+                        opacity: Math.random() * 0.6 + 0.2 // Янз бүрийн тунгалагжилт
+                    });
+
+                    container.appendChild(flake);
+
+                    // Унах хөдөлгөөн (Falling Animation)
+                    gsap.to(flake, {
+                        y: window.innerHeight + 100, // Дэлгэцнээс доош гартал
+                        duration: Math.random() * 5 + 5, // 5-10 секундын хооронд
+                        ease: "none",
+                        repeat: -1, // Тасралтгүй давтах
+                        delay: Math.random() * -10 // Эхлэх цагийг зөрүүлэх
+                    });
+
+                    // Халивалзах хөдөлгөөн (Swaying Animation)
+                    gsap.to(flake, {
+                        x: "+=50", // Баруун тийш 50px савлах
+                        duration: Math.random() * 2 + 2,
+                        yoyo: true, // Буцаж савлах
+                        repeat: -1,
+                        ease: "sine.inOut"
+                    });
+                }
+            }
+            createSnow();
 
             // 1. COUNTDOWN
             // IMPORTANT: Date set to December 20, 2024 (Current year) or 2025 as needed.
