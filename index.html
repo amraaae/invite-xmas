@@ -157,9 +157,10 @@
 </head>
 
 <body class="antialiased selection:bg-royal-500 selection:text-white transition-colors duration-500">
-    <div id="snow-container" class="fixed inset-0 pointer-events-none z-50 overflow-hidden"></div>
+    <canvas id="snow-canvas" class="fixed inset-0 pointer-events-none z-50"></canvas>
 
-    <section class="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden z-10 pb-32 md:pb-0">
+
+    <section class="relative h-[100dvh] w-full flex flex-col items-center justify-center overflow-hidden z-10">
 
         <div class="absolute inset-0 z-0">
             <img src="./assets/background.jpg" class="w-full h-full object-cover blur-[5px] scale-110 opacity-50" alt="New Year Background">
@@ -167,10 +168,10 @@
         </div>
         <canvas id="hero-canvas"></canvas>
 
-        <div class="relative z-20 text-center px-6 max-w-4xl mx-auto w-full flex flex-col items-center justify-center h-full">
+        <div class="relative z-20 text-center px-2 sm:px-6 max-w-4xl mx-auto w-full flex flex-col items-center justify-center h-full pb-20">
 
-            <div class="mb-6 opacity-0 reveal-hero shrink-0">
-                <div class="inline-flex items-center gap-3 px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-royal-500/30 bg-royal-900/30 backdrop-blur-sm shadow-lg">
+            <div class="mb-4 md:mb-6 opacity-0 reveal-hero shrink-0">
+                <div class="inline-flex items-center gap-2 px-3 py-1 md:px-4 md:py-2 rounded-full border border-royal-500/30 bg-royal-900/30 backdrop-blur-sm shadow-lg">
                     <span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-royal-500 animate-pulse"></span>
                     <span class="text-gray-300 text-[10px] md:text-xs tracking-[0.3em] uppercase font-sans font-semibold">2024 - 2025</span>
                 </div>
@@ -180,28 +181,27 @@
                 БИДНИЙ ШИНЭ ЖИЛ
             </h1>
 
-            <h2 class="text-xl sm:text-4xl md:text-6xl font-serif italic text-royal-500 mb-6 md:mb-8 opacity-0 reveal-hero drop-shadow-md">
+            <h2 class="text-lg sm:text-4xl md:text-6xl font-serif italic text-royal-500 mb-4 md:mb-8 opacity-0 reveal-hero drop-shadow-md">
                 Celebration 2025
             </h2>
 
-            <p class="text-gray-200 text-sm sm:text-lg md:text-xl font-light mb-8 md:mb-12 max-w-lg mx-auto opacity-0 reveal-hero drop-shadow-sm font-medium leading-relaxed">
+            <p class="text-gray-200 text-xs sm:text-lg md:text-xl font-light mb-6 md:mb-12 max-w-lg mx-auto opacity-0 reveal-hero drop-shadow-sm font-medium leading-relaxed px-4">
                 Гайхамшигт мөчүүд, шинэ эхлэл, мартагдашгүй дурсамжийг хамтдаа
             </p>
 
-            <div id="countdown" class="flex flex-wrap justify-center gap-4 md:gap-8 opacity-0 reveal-hero shrink-0"></div>
+            <div id="countdown" class="flex flex-wrap justify-center gap-2 md:gap-8 opacity-0 reveal-hero shrink-0 w-full"></div>
         </div>
 
-        <div class="absolute bottom-12 md:bottom-16 left-1/2 transform -translate-x-1/2 z-30 opacity-0 reveal-hero w-full text-center">
+        <div class="absolute bottom-8 md:bottom-16 left-1/2 transform -translate-x-1/2 z-30 opacity-0 reveal-hero w-full text-center">
             <a href="#invitation" class="group relative inline-flex items-center justify-center">
                 <div class="absolute transition-all duration-200 rounded-full -inset-1 bg-gradient-to-r from-royal-600 to-royal-400 blur-lg opacity-40 group-hover:opacity-70 group-hover:duration-200 animate-tilt"></div>
-                <button class="relative inline-flex items-center gap-3 px-8 py-3 md:px-10 md:py-4 bg-royal-500 hover:bg-royal-400 text-white font-bold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(147,73,216,0.4)] hover:shadow-[0_0_40px_rgba(147,73,216,0.6)] hover:-translate-y-1">
-                <span class="tracking-[0.2em] uppercase text-xs md:text-sm font-sans">Урилга үзэх</span>
-                <svg class="w-4 h-4 md:w-5 md:h-5 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
-            </button>
+                <button class="relative inline-flex items-center gap-2 px-6 py-3 md:px-10 md:py-4 bg-royal-500 hover:bg-royal-400 text-white font-bold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(147,73,216,0.4)] hover:shadow-[0_0_40px_rgba(147,73,216,0.6)] hover:-translate-y-1">
+                    <span class="tracking-[0.2em] uppercase text-[10px] md:text-sm font-sans">Урилга үзэх</span>
+                    <svg class="w-4 h-4 md:w-5 md:h-5 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+                </button>
             </a>
         </div>
     </section>
-
     <section id="invitation" class="py-32 px-4 relative z-10 transition-colors duration-500">
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-96 bg-royal-900/30 blur-[100px] rounded-full pointer-events-none"></div>
         <div class="max-w-4xl mx-auto relative z-10 gs-reveal">
@@ -316,87 +316,159 @@
             gsap.registerPlugin(ScrollTrigger);
 
 
-            // 6. SNOW EFFECT
-            function createSnow() {
-                const container = document.getElementById('snow-container');
-                if (!container) return;
+            // 6. OPTIMIZED SNOW EFFECT (CANVAS)
+            function initSnow() {
+                const canvas = document.getElementById('snow-canvas');
+                if (!canvas) return;
 
-                const flakeCount = 60; // Цасны ширхэгийн тоо (Утас гацахгүй байх хэмжээ)
+                const ctx = canvas.getContext('2d');
+                let width = window.innerWidth;
+                let height = window.innerHeight;
 
-                for (let i = 0; i < flakeCount; i++) {
-                    const flake = document.createElement('div');
-                    // Цасны загвар: Бөөрөнхий, цагаан, бүдэг (blur)
-                    flake.className = 'absolute bg-white rounded-full opacity-80 blur-[1px]';
+                // Утсан дээр цөөн, компьютер дээр олон цас оруулна (Performance)
+                const maxFlakes = window.innerWidth < 768 ? 50 : 100;
+                const flakes = [];
 
-                    // Санамсаргүй хэмжээ (2px - 5px)
-                    const size = Math.random() * 3 + 2;
+                canvas.width = width;
+                canvas.height = height;
 
-                    // Эхлэх байрлал (Санамсаргүй)
-                    gsap.set(flake, {
-                        x: Math.random() * window.innerWidth,
-                        y: Math.random() * window.innerHeight,
-                        width: size,
-                        height: size,
-                        opacity: Math.random() * 0.6 + 0.2 // Янз бүрийн тунгалагжилт
-                    });
+                window.addEventListener('resize', () => {
+                    width = window.innerWidth;
+                    height = window.innerHeight;
+                    canvas.width = width;
+                    canvas.height = height;
+                });
 
-                    container.appendChild(flake);
-
-                    // Унах хөдөлгөөн (Falling Animation)
-                    gsap.to(flake, {
-                        y: window.innerHeight + 100, // Дэлгэцнээс доош гартал
-                        duration: Math.random() * 5 + 5, // 5-10 секундын хооронд
-                        ease: "none",
-                        repeat: -1, // Тасралтгүй давтах
-                        delay: Math.random() * -10 // Эхлэх цагийг зөрүүлэх
-                    });
-
-                    // Халивалзах хөдөлгөөн (Swaying Animation)
-                    gsap.to(flake, {
-                        x: "+=50", // Баруун тийш 50px савлах
-                        duration: Math.random() * 2 + 2,
-                        yoyo: true, // Буцаж савлах
-                        repeat: -1,
-                        ease: "sine.inOut"
-                    });
+                function createFlakes() {
+                    for (let i = 0; i < maxFlakes; i++) {
+                        flakes.push({
+                            x: Math.random() * width,
+                            y: Math.random() * height,
+                            r: Math.random() * 2 + 1, // Цасны хэмжээ
+                            d: Math.random() * maxFlakes, // Нягтрал
+                            a: Math.random() * 0.5 + 0.1, // Тунгалагжилт
+                            speed: Math.random() * 1 + 0.5, // Унах хурд
+                            sway: Math.random() * 0.05 // Савлах хөдөлгөөн
+                        });
+                    }
                 }
-            }
-            createSnow();
 
-            // 1. COUNTDOWN
-            // IMPORTANT: Date set to December 20, 2024 (Current year) or 2025 as needed.
-            // Using 2024 since current date is usually late 2024 for these events.
+                function drawFlakes() {
+                    ctx.clearRect(0, 0, width, height);
+                    ctx.fillStyle = "white";
+                    ctx.beginPath();
+
+                    for (let i = 0; i < maxFlakes; i++) {
+                        const f = flakes[i];
+                        ctx.moveTo(f.x, f.y);
+                        ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2, true);
+                    }
+
+                    ctx.fill();
+                    moveFlakes();
+                }
+
+                let angle = 0;
+
+                function moveFlakes() {
+                    angle += 0.01;
+                    for (let i = 0; i < maxFlakes; i++) {
+                        const f = flakes[i];
+
+                        // Доошоо унах + Савлах хөдөлгөөн
+                        f.y += Math.pow(f.d, 2) + 1 > 0 ? f.speed : 0; // Gravity substitute
+                        f.x += Math.sin(angle) * 0.5; // Sway
+
+                        // Дэлгэцнээс гарвал буцаад дээр гаргах
+                        if (f.y > height) {
+                            flakes[i] = {
+                                x: Math.random() * width,
+                                y: 0,
+                                r: f.r,
+                                d: f.d,
+                                a: f.a,
+                                speed: f.speed,
+                                sway: f.sway
+                            };
+                        }
+                        // Хажуу тийш гарвал буцаах
+                        if (f.x > width + 5 || f.x < -5) {
+                            if (Math.sin(angle) > 0) {
+                                flakes[i] = {
+                                    x: -5,
+                                    y: Math.random() * height,
+                                    r: f.r,
+                                    d: f.d,
+                                    a: f.a,
+                                    speed: f.speed,
+                                    sway: f.sway
+                                };
+                            } else {
+                                flakes[i] = {
+                                    x: width + 5,
+                                    y: Math.random() * height,
+                                    r: f.r,
+                                    d: f.d,
+                                    a: f.a,
+                                    speed: f.speed,
+                                    sway: f.sway
+                                };
+                            }
+                        }
+                    }
+                }
+
+                function animate() {
+                    drawFlakes();
+                    requestAnimationFrame(animate);
+                }
+
+                createFlakes();
+                animate();
+            }
+            initSnow();
+
+            // 1. COUNTDOWN (Mobile Optimized)
             const targetDate = new Date("December 20, 2025 18:00:00").getTime();
 
             function updateCountdown() {
                 const now = new Date().getTime();
                 const distance = targetDate - now;
-
-                // Safety check if date passed
                 if (distance < 0) {
                     const container = document.getElementById("countdown");
-                    if (container) container.innerHTML = `<div class="text-center animate-bounce"><h2 class="text-3xl md:text-5xl font-display text-gold-500">Шинэ Жилийн Мэнд!</h2></div>`;
+                    if (container) container.innerHTML = `<div class="text-center animate-bounce"><h2 class="text-2xl md:text-5xl font-display text-gold-500">Шинэ Жилийн Мэнд!</h2></div>`;
                     return;
                 }
-
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+                // ӨӨРЧЛӨЛТ: w-16 h-16 (mobile) -> md:w-24 md:h-24 (desktop)
+                // text-xl (mobile) -> md:text-5xl (desktop)
+                // padding болон margin-г багасгав
                 const box = (val, label) => `
-                    <div class="flex flex-col items-center mx-2 md:mx-4 group">
-                        <div class="relative bg-royal-900/40 border border-royal-500/30 backdrop-blur-md rounded-xl p-4 w-20 md:w-24 h-20 md:h-24 flex items-center justify-center shadow-[0_0_15px_rgba(147,73,216,0.15)] group-hover:shadow-[0_0_25px_rgba(147,73,216,0.4)] transition-all duration-300 transform group-hover:-translate-y-1">
-                            <span class="text-3xl md:text-5xl font-display font-bold text-white group-hover:text-gold-300 transition-colors">${val < 10 ? '0'+val : val}</span>
-                            <div class="absolute top-0 left-0 w-2 h-2 border-t border-l border-royal-500 opacity-50"></div>
-                            <div class="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-royal-500 opacity-50"></div>
+                    <div class="flex flex-col items-center mx-1 md:mx-4 group">
+                        <div class="relative bg-royal-900/40 border border-royal-500/30 backdrop-blur-md rounded-xl p-2 md:p-4 w-16 h-16 md:w-24 md:h-24 flex items-center justify-center shadow-[0_0_15px_rgba(147,73,216,0.15)]">
+                            <span class="text-xl md:text-5xl font-display font-bold text-white transition-colors">${val < 10 ? '0'+val : val}</span>
+                            <div class="absolute top-0 left-0 w-1.5 h-1.5 md:w-2 md:h-2 border-t border-l border-royal-500 opacity-50"></div>
+                            <div class="absolute bottom-0 right-0 w-1.5 h-1.5 md:w-2 md:h-2 border-b border-r border-royal-500 opacity-50"></div>
                         </div>
-                        <span class="text-[10px] md:text-xs uppercase text-royal-400 tracking-[0.2em] mt-3 font-semibold group-hover:text-white transition-colors text-shadow-sm">${label}</span>
+                        <span class="text-[8px] md:text-xs uppercase text-royal-400 tracking-[0.1em] md:tracking-[0.2em] mt-2 font-semibold text-shadow-sm">${label}</span>
                     </div>`;
 
                 const container = document.getElementById("countdown");
                 if (container) {
-                    container.innerHTML = `<div class="flex items-start justify-center">${box(days, "Өдөр")}<div class="text-2xl md:text-4xl text-royal-500/50 pt-6 font-light animate-pulse">:</div>${box(hours, "Цаг")}<div class="text-2xl md:text-4xl text-royal-500/50 pt-6 font-light animate-pulse">:</div>${box(minutes, "Минут")}<div class="text-2xl md:text-4xl text-royal-500/50 pt-6 font-light animate-pulse">:</div>${box(seconds, "Секунд")}</div>`;
+                    // Separator (:) нь утсан дээр хэт зай эзэлж байвал hidden болгож болно, эсвэл хэмжээг нь багасгана
+                    const sep = `<div class="text-lg md:text-4xl text-royal-500/50 pt-4 md:pt-6 font-light animate-pulse">:</div>`;
+
+                    container.innerHTML = `
+                        <div class="flex items-start justify-center">
+                            ${box(days, "Өдөр")} ${sep}
+                            ${box(hours, "Цаг")} ${sep}
+                            ${box(minutes, "Минут")} ${sep}
+                            ${box(seconds, "Секунд")}
+                        </div>`;
                 }
             }
             setInterval(updateCountdown, 1000);
