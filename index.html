@@ -15,6 +15,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <script>
         tailwind.config = {
@@ -146,6 +147,51 @@
             z-index: 1;
         }
         
+        .light-wire {
+            position: absolute;
+            top: -15px;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            border-bottom: 2px solid #2d2d2d;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .light-bulb {
+            position: absolute;
+            top: 24px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            z-index: 2;
+            animation: flash 2s infinite alternate;
+            box-shadow: 0 0 10px;
+        }
+        
+        @keyframes flash {
+            0% {
+                opacity: 0.4;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1.1);
+                box-shadow: 0 0 20px;
+            }
+        }
+        
+        @keyframes flicker {
+            0% {
+                opacity: 0.8;
+                transform: translateX(-50%) scale(1);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(-50%) scale(1.1);
+            }
+        }
+        
         @media (min-width: 768px) {
             .timeline-line-bg,
             .timeline-line-fill {
@@ -158,6 +204,8 @@
 
 <body class="antialiased selection:bg-royal-500 selection:text-white transition-colors duration-500">
     <!-- <canvas id="snow-canvas" class="fixed inset-0 pointer-events-none z-50"></canvas> -->
+    <div class="fixed top-0 left-0 w-full z-20 pointer-events-none overflow-hidden h-20" id="lights-container">
+    </div>
 
 
     <section class="relative h-[100dvh] w-full flex flex-col items-center justify-center overflow-hidden z-10">
@@ -195,29 +243,25 @@
             <div id="countdown" class="flex flex-wrap justify-center gap-2 md:gap-8 opacity-0 reveal-hero shrink-0 w-full"></div>
         </div>
 
-        <div class="absolute bottom-8 md:bottom-16 left-1/2 transform -translate-x-1/2 z-30 opacity-0 reveal-hero w-full text-center">
-            <a href="#invitation" class="group relative inline-flex items-center justify-center">
-                <div class="absolute transition-all duration-200 rounded-full -inset-1 bg-gradient-to-r from-royal-600 to-royal-400 blur-lg opacity-40 group-hover:opacity-70 group-hover:duration-200 animate-tilt"></div>
-                <button class="relative inline-flex items-center gap-2 px-6 py-3 md:px-10 md:py-4 bg-royal-500 hover:bg-royal-400 text-white font-bold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(147,73,216,0.4)] hover:shadow-[0_0_40px_rgba(147,73,216,0.6)] hover:-translate-y-1">
-                    <span class="tracking-[0.2em] uppercase text-[10px] md:text-sm font-sans">Урилга үзэх</span>
-                    <svg class="w-4 h-4 md:w-5 md:h-5 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
-                </button>
-            </a>
+        <div class="absolute bottom-8 md:bottom-16 left-1/2 transform -translate-x-1/2 z-30 opacity-0 reveal-hero w-full px-4">
+            <div class="flex flex-col md:flex-row items-center justify-center gap-4">
+
+                <a href="#invitation" class="group relative inline-flex items-center justify-center w-full md:w-auto">
+                    <div class="absolute transition-all duration-200 rounded-full -inset-1 bg-gradient-to-r from-royal-600 to-royal-400 blur-lg opacity-40 group-hover:opacity-70 animate-tilt"></div>
+                    <button class="relative w-full md:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-royal-500 hover:bg-royal-400 text-white font-bold rounded-full transition-all shadow-[0_0_20px_rgba(147,73,216,0.4)] hover:-translate-y-1">
+                <span class="tracking-[0.2em] uppercase text-xs md:text-sm font-sans">Урилга үзэх</span>
+                <svg class="w-4 h-4 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+            </button>
+                </a>
+            </div>
         </div>
     </section>
 
     <section id="invitation" class="py-32 px-4 relative z-10 transition-colors duration-500">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-96 bg-royal-900/30 blur-[100px] rounded-full pointer-events-none"></div>
+        <div id="tilt-card" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-96 bg-royal-900/30 blur-[100px] rounded-full pointer-events-none"></div>
         <div class="max-w-4xl mx-auto relative z-10 gs-reveal">
             <div class="flex flex-col items-center text-center">
-                <div class="flex flex-col items-center gap-4 mb-10">
-                    <div class="w-[1px] h-16 bg-gradient-to-b from-transparent via-gold-500 to-gold-500 opacity-50"></div>
-                    <div class="relative w-12 h-12 flex items-center justify-center">
-                        <div class="absolute inset-0 border border-gold-500 rounded-full animate-[spin_10s_linear_infinite]"></div>
-                        <div class="absolute inset-1 border border-royal-400/30 rounded-full"></div>
-                        <div class="w-2 h-2 bg-gold-500 rotate-45"></div>
-                    </div>
-                </div>
+
                 <h3 class="text-royal-400 font-sans text-xs tracking-[0.6em] uppercase mb-6 opacity-80">Урилга</h3>
                 <h2 class="text-4xl md:text-6xl font-serif text-white mb-10 leading-tight drop-shadow-lg">
                     Эрхэм хүндэт <br>
@@ -229,7 +273,7 @@
                 <div class="relative bg-white/5 border-t border-l border-white/5 backdrop-blur-sm p-10 md:p-14 rounded-[2rem] shadow-2xl max-w-3xl w-full transition-colors duration-500">
                     <span class="absolute top-0 left-6 text-8xl text-purple-500/40 font-serif leading-none -translate-y-6">“</span>
                     <p class="relative z-10 text-gray-300 text-lg md:text-xl font-light leading-relaxed font-sans text-center transition-colors duration-500">
-                        Цаг хугацааны хүрд эргэж, дахин нэгэн шинэ он айлчлан ирлээ. Энэхүү баярт мөчийг бид халуун дулаан уур амьсгал, инээд хөөр, гэрэл гэгээгээр дүүрэн өнгөрүүлэхийг зорьж байна.
+                        Цаг хугацааны хүрд эргэж, дахин нэгэн шинэ он айлчлан ирлээ. Энэхүү баярт мөчийг гэр бүлээрээ халуун дулаан уур амьсгал, инээд хөөр, аз жаргал, гэрэл гэгээгээр дүүрэн өнгөрүүлэхийг зорьж байна.
                         <br><br>
                         <span class="text-white font-medium transition-colors duration-500">Таныг бидний баярт хүрэлцэн ирэхийг урьж байна.</span>
                     </p>
@@ -241,26 +285,156 @@
                 </div>
             </div>
         </div>
+
+
     </section>
 
-    <section class="py-20 bg-[#05020a] relative overflow-hidden transition-colors duration-500">
-
-        <div class="relative gallery-mask">
-            <div id="gallery-row-1" class="flex gap-6 w-max mb-6">
-                <img src="./assets/background.jpg" class="h-64 w-96 object-cover rounded-md opacity-60 hover:opacity-100 transition duration-500 border border-royal-900">
-                <img src="./assets/background.jpg" class="h-64 w-96 object-cover rounded-md opacity-60 hover:opacity-100 transition duration-500 border border-royal-900">
-                <img src="./assets/background.jpg" class="h-64 w-96 object-cover rounded-md opacity-60 hover:opacity-100 transition duration-500 border border-royal-900">
-                <img src="./assets/background.jpg" class="h-64 w-96 object-cover rounded-md opacity-60 hover:opacity-100 transition duration-500 border border-royal-900">
+    <section class="relative py-32 overflow-hidden bg-gradient-to-b from-[#08040c] via-[#1a0b2e] to-[#020005]">
+        <div class="relative z-10 max-w-3xl mx-auto px-6 text-center gs-reveal">
+            <div class="mb-10">
+                <span class="inline-block text-5xl mb-6 filter drop-shadow-[0_0_15px_rgba(255,165,0,0.6)] animate-bounce">🏮</span>
+                <h2 class="text-3xl md:text-5xl font-serif text-white mb-6">2025 Оны Хүсэл</h2>
+                <p class="text-gray-300 font-light text-lg leading-relaxed">
+                    Шинэ ондоо биелэхийг хүсч буй нандин хүслээ бичээд<br class="hidden md:block"> тэнгэр өөд илгээгээрэй.
+                </p>
             </div>
-            <div id="gallery-row-2" class="flex gap-6 w-max">
-                <img src="./assets/picture.jpg" class="h-64 w-96 object-cover rounded-md opacity-60 hover:opacity-100 transition duration-500 border border-royal-900">
-                <img src="./assets/picture.jpg" class="h-64 w-96 object-cover rounded-md opacity-60 hover:opacity-100 transition duration-500 border border-royal-900">
-                <img src="./assets/picture.jpg" class="h-64 w-96 object-cover rounded-md opacity-60 hover:opacity-100 transition duration-500 border border-royal-900">
-                <img src="./assets/picture.jpg" class="h-64 w-96 object-cover rounded-md opacity-60 hover:opacity-100 transition duration-500 border border-royal-900">
+
+            <div class="relative max-w-lg mx-auto group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-orange-500 to-gold-500 rounded-full blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
+                <div class="relative flex items-center bg-[#0a0510] rounded-full border border-white/10 p-1">
+                    <input type="text" id="final-wish-input" placeholder="Энд хүслээ бичээрэй..." class="w-full bg-transparent text-white px-6 py-4 rounded-full focus:outline-none placeholder-gray-500 font-light text-base md:text-lg" onkeypress="if(event.key === 'Enter') sendFinalLantern()">
+
+                    <button onclick="sendFinalLantern()" class="shrink-0 bg-gradient-to-r from-orange-600 to-orange-400 hover:from-orange-500 hover:to-orange-300 text-white px-8 py-3 rounded-full font-medium transition-all shadow-[0_0_20px_rgba(234,88,12,0.4)] hover:-translate-y-0.5 active:scale-95">
+                    Илгээх
+                </button>
+                </div>
+            </div>
+
+            <div id="final-success-msg" class="mt-6 h-6 text-orange-400 text-sm font-serif italic opacity-0 transition-opacity duration-500">
+                Таны хүсэл тэнгэрт хөөрлөө... ✨
             </div>
         </div>
     </section>
 
+    <style>
+        .flying-lantern {
+            position: fixed;
+            /* Fixed position is crucial for flying over sections */
+            bottom: -100px;
+            width: 40px;
+            height: 55px;
+            background: linear-gradient(to top, #ff6b00, #ffcc00);
+            border-radius: 5px 5px 25px 25px;
+            box-shadow: 0 0 20px rgba(255, 107, 0, 0.8), inset 0 -10px 20px rgba(255, 69, 0, 0.5);
+            z-index: 9999;
+            /* Highest Z-Index to show on top of everything */
+            pointer-events: none;
+            opacity: 0.9;
+        }
+        
+        .flying-lantern::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 6px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #ffaa00, 0 0 20px #ff4500;
+            animation: flicker 0.5s infinite alternate;
+        }
+        
+        @keyframes flicker {
+            0% {
+                opacity: 0.8;
+                transform: translateX(-50%) scale(1);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(-50%) scale(1.1);
+            }
+        }
+    </style>
+
+    <script>
+        function sendFinalLantern() {
+            const input = document.getElementById('final-wish-input');
+            const msg = document.getElementById('final-success-msg');
+            const text = input.value.trim();
+
+            // 1. Check if empty
+            if (!text) {
+                input.focus();
+                input.parentElement.style.borderColor = "red";
+                setTimeout(() => input.parentElement.style.borderColor = "rgba(255,255,255,0.1)", 500);
+                return;
+            }
+
+            // 2. Create Lantern Element
+            const lantern = document.createElement('div');
+            lantern.classList.add('flying-lantern');
+
+            // Random position (20% to 80% of screen width)
+            lantern.style.left = (Math.random() * 60 + 20) + '%';
+
+            // Add to Body
+            document.body.appendChild(lantern);
+
+            // 3. Clear Input & Show Message
+            input.value = '';
+            msg.style.opacity = '1';
+            setTimeout(() => msg.style.opacity = '0', 3000);
+
+            // 4. Animate with GSAP (If loaded) or CSS Fallback
+            if (typeof gsap !== 'undefined') {
+                gsap.to(lantern, {
+                    y: -window.innerHeight - 200, // Move way up
+                    x: (Math.random() - 0.5) * 200, // Drift left/right
+                    rotation: (Math.random() - 0.5) * 20, // Tilt
+                    opacity: 0,
+                    duration: Math.random() * 3 + 5, // 5-8 seconds
+                    ease: "power1.in",
+                    onComplete: () => lantern.remove()
+                });
+            } else {
+                // Fallback animation if GSAP fails
+                lantern.style.transition = "all 5s ease-in";
+                setTimeout(() => {
+                    lantern.style.bottom = "120%";
+                    lantern.style.opacity = "0";
+                }, 100);
+                setTimeout(() => lantern.remove(), 5100);
+            }
+        }
+    </script>
+
+    <section class="py-32 overflow-hidden bg-[#0a0510] relative">
+        <div class="flex flex-wrap justify-center gap-4 md:gap-10 max-w-6xl mx-auto px-4 pb-20">
+
+            <div class="polaroid group relative bg-white p-3 pb-12 shadow-lg transform -rotate-6 hover:rotate-0 hover:scale-110 hover:z-50 transition duration-500 ease-out cursor-pointer w-40 md:w-56">
+                <div class="bg-gray-200 h-40 md:h-52 overflow-hidden bg-cover bg-center" style="background-image: url('./assets/picture.jpg');"></div>
+                <p class="absolute bottom-4 left-0 w-full text-center text-gray-600 font-serif italic text-sm group-hover:text-black">Family ❤️</p>
+            </div>
+
+            <div class="polaroid group relative bg-white p-3 pb-12 shadow-lg transform rotate-3 hover:rotate-0 hover:scale-110 hover:z-50 transition duration-500 ease-out cursor-pointer w-40 md:w-56 mt-10 md:mt-0">
+                <div class="bg-gray-200 h-40 md:h-52 overflow-hidden bg-cover bg-center" style="background-image: url('./assets/background.jpg');"></div>
+                <p class="absolute bottom-4 left-0 w-full text-center text-gray-600 font-serif italic text-sm group-hover:text-black">Crazy Times 🤪</p>
+            </div>
+
+            <div class="polaroid group relative bg-white p-3 pb-12 shadow-lg transform -rotate-3 hover:rotate-0 hover:scale-110 hover:z-50 transition duration-500 ease-out cursor-pointer w-40 md:w-56">
+                <div class="bg-gray-200 h-40 md:h-52 overflow-hidden bg-cover bg-center" style="background-image: url('./assets/picture.jpg');"></div>
+                <p class="absolute bottom-4 left-0 w-full text-center text-gray-600 font-serif italic text-sm group-hover:text-black">2024 ✨</p>
+            </div>
+
+            <div class="polaroid group relative bg-white p-3 pb-12 shadow-lg transform rotate-6 hover:rotate-0 hover:scale-110 hover:z-50 transition duration-500 ease-out cursor-pointer w-40 md:w-56 mt-10 md:mt-0">
+                <div class="bg-gray-200 h-40 md:h-52 overflow-hidden bg-cover bg-center" style="background-image: url('./assets/background.jpg');"></div>
+                <p class="absolute bottom-4 left-0 w-full text-center text-gray-600 font-serif italic text-sm group-hover:text-black">Besties 🥂</p>
+            </div>
+
+        </div>
+    </section>
     <section class="py-24 px-4 bg-dark-950 relative z-10 transition-colors duration-500 overflow-hidden">
         <div class="absolute inset-0 z-0">
             <img src="./assets/background.jpg" class="w-full h-full object-cover opacity-30 blur-[2px]" alt="Program Background">
@@ -290,7 +464,7 @@
                             Private <br> <span class="text-royal-500 italic font-serif">House Party</span>
                         </h2>
                         <p class="text-gray-400 font-light leading-relaxed transition-colors duration-500">
-                            Ulaanbaatar, Mongolia<br> (Яг байршлыг доорх товч дээр дарж харна уу)
+                            Ulaanbaatar, Mongolia<br>
                         </p>
                     </div>
 
@@ -299,10 +473,10 @@
                             <span class="w-8 h-[1px] bg-royal-500"></span> Dress Code
                         </h3>
                         <h2 class="text-3xl font-display text-white mb-3 transition-colors duration-500">
-                            Chic & Sparkling ✨
+                            Chic & Cheerful ✨
                         </h2>
                         <p class="text-gray-400 font-light transition-colors duration-500 leading-relaxed">
-                            Өөртөө хамгийн тухтай, дэгжин, <br> бас бага зэрэг гялалзсан өнгө төрхийг бүрдүүлээрэй.
+                            Өөртөө хамгийн тухтай, дэгжин, <br> баярын уур амьсгалыг мэдрүүлсэн өнгө төрхийг бүрдүүлээрэй.
                         </p>
                     </div>
 
@@ -328,9 +502,39 @@
     </section>
 
     <footer class="py-10 bg-black text-center border-t border-royal-900 relative z-10 transition-colors duration-500">
-        <h2 class="text-white text-2xl font-display font-bold mb-2 tracking-widest transition-colors duration-500">Бидний Шинэ Жил 2025</h2>
-        <p class="text-gray-600 text-xs uppercase tracking-widest">Created for celebration.</p>
+        <h2 class="text-white text-2xl font-display font-bold mb-2 tracking-widest transition-colors duration-500">✨Celebration 2025✨</h2>
+        <p class="text-gray-600 text-xs uppercase tracking-widest">Created for amraaae.</p>
     </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const container = document.getElementById('lights-container');
+            const colors = ['#FFD700', '#FF3030', '#00FF7F', '#00BFFF', '#FF00FF']; // Gold, Red, Green, Blue, Purple
+
+            // Wire
+            const wire = document.createElement('div');
+            wire.className = 'light-wire';
+            container.appendChild(wire);
+
+            // Bulbs
+            const count = window.innerWidth < 768 ? 10 : 20; // Mobile vs Desktop count
+            const spacing = 100 / count;
+
+            for (let i = 0; i < count; i++) {
+                const bulb = document.createElement('div');
+                bulb.className = 'light-bulb';
+                bulb.style.left = (i * spacing + (spacing / 2)) + '%';
+
+                // Random color & animation delay
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                bulb.style.backgroundColor = color;
+                bulb.style.color = color; // For box-shadow color
+                bulb.style.animationDelay = Math.random() * 2 + 's';
+
+                container.appendChild(bulb);
+            }
+        });
+    </script>
 
     <script>
         document.addEventListener("DOMContentLoaded", (event) => {
@@ -381,6 +585,7 @@
             }
             setInterval(updateCountdown, 1000);
             updateCountdown();
+
 
             // 2. HERO ANIMATIONS
             const canvas = document.getElementById('hero-canvas');
@@ -448,23 +653,23 @@
 
             // 3. PROGRAM DATA (Updated List)
             const programData = [{
-                title: "Ширээ Засах, Бэлдэх",
-                desc: "Баярын ширээгээ хамтдаа бэлдэх"
+                title: "✨Ширээ Засах, Бэлдэх",
+                desc: "Баярын оройн уур амьсгалыг бүрдүүлж, ширээгээ хамтдаа гоёмсог засч бэлтгэнэ."
             }, {
-                title: "Гацуур Чимэх",
-                desc: "Баярын уур амьсгал бүрдүүлэх"
+                title: "🎄Гацуур Чимэх",
+                desc: "Гэрийн дулаан уур амьсгалыг гэрэлтүүлэх гацуураа хамтдаа чимэглэж, шинэ оны өнгө гэрэл нэмнэ."
             }, {
-                title: "Хоол Захиалга & Мах Шарах",
-                desc: "Амтат гуя болон тусгай зоог"
+                title: "🍽 Dinner Time",
+                desc: "Шинэ жилийн уур амьсгал дунд амтат оройн зоогоо идэж, халуун дулаан яриа өрнүүлэн, дурсамж бүтээнэ."
             }, {
-                title: "Өвлийн Өвгөн",
-                desc: "Бэлэг гардуулах баярт мөч"
+                title: "🎅 Өвлийн Өвгөн",
+                desc: "Өвлийн өвгөний мэндчилгээ, Бэлэг гардуулах баярт мөч"
             }, {
-                title: "Сугалаа Явуулах",
-                desc: "Азтан шалгаруулах хөгжөөнт цаг"
+                title: "✨ Сугалаа & Хөгжөөнт Тоглоом",
+                desc: "Азтан тодруулах сугалаа, Зочдыг оролцуулсан хөгжөөнт тоглоомууд "
             }, {
-                title: "Караокэ & Салют",
-                desc: "Дуу хуур, ёслолын буудлага"
+                title: "🎤 Караокэ & Салют",
+                desc: "Дуу хуур, бүжиг, хөгжим, ёслолын буудлага"
             }];
 
             const programContainer = document.getElementById('program-container');
@@ -485,6 +690,8 @@
                     programContainer.innerHTML += html;
                 });
             }
+
+
 
             // 4. SCROLL ANIMATIONS (Triggered after DOM ready)
             gsap.to(".reveal-hero", {
@@ -536,27 +743,55 @@
                 });
             });
 
-            // 5. GALLERY SCROLL
-            const row1 = document.getElementById("gallery-row-1");
-            const row2 = document.getElementById("gallery-row-2");
-            if (row1 && row2) {
-                row1.innerHTML += row1.innerHTML + row1.innerHTML;
-                row2.innerHTML += row2.innerHTML + row2.innerHTML;
-                gsap.to(row1, {
-                    xPercent: -33.33,
-                    ease: "none",
-                    duration: 30,
-                    repeat: -1
-                });
-                gsap.fromTo(row2, {
-                    xPercent: -33.33
-                }, {
-                    xPercent: 0,
-                    ease: "none",
-                    duration: 30,
-                    repeat: -1
-                });
+
+            // Салют буудуулах функц
+            function fireConfetti() {
+                var duration = 3 * 1000;
+                var animationEnd = Date.now() + duration;
+                var defaults = {
+                    startVelocity: 30,
+                    spread: 360,
+                    ticks: 60,
+                    zIndex: 999
+                };
+
+                function randomInOut(min, max) {
+                    return Math.random() * (max - min) + min;
+                }
+
+                var interval = setInterval(function() {
+                    var timeLeft = animationEnd - Date.now();
+
+                    if (timeLeft <= 0) {
+                        return clearInterval(interval);
+                    }
+
+                    var particleCount = 50 * (timeLeft / duration);
+
+                    // Дэлгэцийн 2 талаас буудна
+                    confetti(Object.assign({}, defaults, {
+                        particleCount,
+                        origin: {
+                            x: randomInOut(0.1, 0.3),
+                            y: Math.random() - 0.2
+                        }
+                    }));
+                    confetti(Object.assign({}, defaults, {
+                        particleCount,
+                        origin: {
+                            x: randomInOut(0.7, 0.9),
+                            y: Math.random() - 0.2
+                        }
+                    }));
+                }, 250);
             }
+
+            // Таны "Урилга үзэх" товч дээр дарахад салют буудна
+            document.querySelector('a[href="#invitation"] button').addEventListener('click', fireConfetti);
+
+            // Мөн шинэ жил болоход (Countdown дуусахад) автоматаар буудуулахаар тохируулж болно
+
+
 
             // Force refresh ScrollTrigger after a slight delay to handle mobile address bar resizing
             window.addEventListener("load", () => {
