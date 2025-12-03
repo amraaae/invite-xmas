@@ -410,31 +410,53 @@
         }
     </script>
 
-    <section class="py-32 overflow-hidden bg-[#0a0510] relative">
-        <div class="flex flex-wrap justify-center gap-4 md:gap-10 max-w-6xl mx-auto px-4 pb-20">
+    <section class="py-20 md:py-32 overflow-hidden bg-[#0a0510] relative">
 
-            <div class="polaroid group relative bg-white p-3 pb-12 shadow-lg transform -rotate-6 hover:rotate-0 hover:scale-110 hover:z-50 transition duration-500 ease-out cursor-pointer w-40 md:w-56">
-                <div class="bg-gray-200 h-40 md:h-52 overflow-hidden bg-cover bg-center" style="background-image: url('./assets/picture.jpg');"></div>
-                <p class="absolute bottom-4 left-0 w-full text-center text-gray-600 font-serif italic text-sm group-hover:text-black">Family ❤️</p>
+        <div class="flex flex-nowrap overflow-x-auto items-start gap-4 md:gap-10 px-4 pb-10 max-w-6xl mx-auto md:justify-center md:overflow-visible scrollbar-hide snap-x snap-mandatory">
+
+            <div class="snap-center flex-shrink-0 group relative bg-white p-3 pb-12 shadow-xl transform -rotate-3 md:-rotate-6 hover:rotate-0 hover:scale-105 hover:z-50 transition duration-500 ease-out cursor-pointer w-60 md:w-64 rounded-sm">
+                <div class="w-full h-52 overflow-hidden bg-white border border-gray-100">
+                    <img src="./assets/family1.jpg" alt="Family" class="w-full h-full object-contain">
+                </div>
+                <p class="absolute bottom-4 left-0 w-full text-center text-gray-600 font-serif italic text-sm md:text-base group-hover:text-black transition-colors">Family ❤️</p>
             </div>
 
-            <div class="polaroid group relative bg-white p-3 pb-12 shadow-lg transform rotate-3 hover:rotate-0 hover:scale-110 hover:z-50 transition duration-500 ease-out cursor-pointer w-40 md:w-56 mt-10 md:mt-0">
-                <div class="bg-gray-200 h-40 md:h-52 overflow-hidden bg-cover bg-center" style="background-image: url('./assets/background.jpg');"></div>
-                <p class="absolute bottom-4 left-0 w-full text-center text-gray-600 font-serif italic text-sm group-hover:text-black">Crazy Times 🤪</p>
+            <div class="snap-center flex-shrink-0 group relative bg-white p-3 pb-12 shadow-xl transform rotate-2 md:rotate-3 hover:rotate-0 hover:scale-105 hover:z-50 transition duration-500 ease-out cursor-pointer w-60 md:w-64 rounded-sm">
+                <div class="w-full h-52 overflow-hidden bg-white border border-gray-100">
+                    <img src="./assets/family2.jpg" alt="Crazy Times" class="w-full h-full object-contain">
+                </div>
+                <p class="absolute bottom-4 left-0 w-full text-center text-gray-600 font-serif italic text-sm md:text-base group-hover:text-black transition-colors">Crazy Times 🤪</p>
             </div>
 
-            <div class="polaroid group relative bg-white p-3 pb-12 shadow-lg transform -rotate-3 hover:rotate-0 hover:scale-110 hover:z-50 transition duration-500 ease-out cursor-pointer w-40 md:w-56">
-                <div class="bg-gray-200 h-40 md:h-52 overflow-hidden bg-cover bg-center" style="background-image: url('./assets/picture.jpg');"></div>
-                <p class="absolute bottom-4 left-0 w-full text-center text-gray-600 font-serif italic text-sm group-hover:text-black">2024 ✨</p>
+            <div class="snap-center flex-shrink-0 group relative bg-white p-3 pb-12 shadow-xl transform -rotate-2 md:-rotate-3 hover:rotate-0 hover:scale-105 hover:z-50 transition duration-500 ease-out cursor-pointer w-60 md:w-64 rounded-sm">
+                <div class="w-full h-52 overflow-hidden bg-white border border-gray-100">
+                    <img src="./assets/family3.jpg" alt="2025" class="w-full h-full object-contain">
+                </div>
+                <p class="absolute bottom-4 left-0 w-full text-center text-gray-600 font-serif italic text-sm md:text-base group-hover:text-black transition-colors">2025 ✨</p>
             </div>
 
-            <div class="polaroid group relative bg-white p-3 pb-12 shadow-lg transform rotate-6 hover:rotate-0 hover:scale-110 hover:z-50 transition duration-500 ease-out cursor-pointer w-40 md:w-56 mt-10 md:mt-0">
-                <div class="bg-gray-200 h-40 md:h-52 overflow-hidden bg-cover bg-center" style="background-image: url('./assets/background.jpg');"></div>
-                <p class="absolute bottom-4 left-0 w-full text-center text-gray-600 font-serif italic text-sm group-hover:text-black">Besties 🥂</p>
+            <div class="snap-center flex-shrink-0 group relative bg-white p-3 pb-12 shadow-xl transform rotate-3 md:rotate-6 hover:rotate-0 hover:scale-105 hover:z-50 transition duration-500 ease-out cursor-pointer w-60 md:w-64 rounded-sm">
+                <div class="w-full h-52 overflow-hidden bg-white border border-gray-100">
+                    <img src="./assets/children.jpg" alt="Children" class="w-full h-full object-contain">
+                </div>
+                <p class="absolute bottom-4 left-0 w-full text-center text-gray-600 font-serif italic text-sm md:text-base group-hover:text-black transition-colors">Children 🥂</p>
             </div>
+
+
 
         </div>
     </section>
+
+    <style>
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
     <section class="py-24 px-4 bg-dark-950 relative z-10 transition-colors duration-500 overflow-hidden">
         <div class="absolute inset-0 z-0">
             <img src="./assets/background.jpg" class="w-full h-full object-cover opacity-30 blur-[2px]" alt="Program Background">
