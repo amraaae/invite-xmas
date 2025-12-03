@@ -413,7 +413,7 @@
 
     <section class="py-20 md:py-32 overflow-hidden bg-[#0a0510] relative">
 
-        <div class="flex flex-nowrap overflow-x-auto items-center gap-6 px-4 py-12 w-full mx-auto scrollbar-hide snap-x snap-mandatory">
+        <div id="gallery-container" class="flex flex-nowrap overflow-x-auto items-center gap-6 px-4 py-12 w-full mx-auto scrollbar-hide snap-x snap-mandatory scroll-smooth">
 
             <div class="snap-center flex-shrink-0 group relative bg-white p-3 pb-12 shadow-xl transform -rotate-3 hover:rotate-0 hover:scale-105 hover:z-50 transition duration-500 ease-out cursor-pointer w-60 md:w-64 rounded-sm">
                 <div class="w-full h-52 overflow-hidden bg-white border border-gray-100">
@@ -473,13 +473,46 @@
 
         </div>
 
-        <div class="flex justify-center items-center gap-2 mt-2 text-gray-400 text-xs tracking-widest uppercase opacity-80 animate-pulse">
+        <div class="hidden md:flex justify-center items-center gap-6 mt-4 relative z-20">
+            <button onclick="scrollGallery('left')" class="p-4 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md transition-all duration-300 hover:scale-110 border border-white/10 group">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 group-hover:-translate-x-1 transition-transform">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            </svg>
+        </button>
+
+            <button onclick="scrollGallery('right')" class="p-4 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md transition-all duration-300 hover:scale-110 border border-white/10 group">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 group-hover:translate-x-1 transition-transform">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+        </button>
+        </div>
+
+        <div class="md:hidden flex justify-center items-center gap-2 mt-2 text-gray-400 text-xs tracking-widest uppercase opacity-80 animate-pulse">
             <span>&larr;</span>
             <span>Хажуу тийш гүйлгэнэ үү</span>
             <span>&rarr;</span>
         </div>
 
     </section>
+
+    <script>
+        function scrollGallery(direction) {
+            const container = document.getElementById('gallery-container');
+            const scrollAmount = 300; // Нэг дарахад гүйх хэмжээ (px)
+
+            if (direction === 'left') {
+                container.scrollBy({
+                    left: -scrollAmount,
+                    behavior: 'smooth'
+                });
+            } else {
+                container.scrollBy({
+                    left: scrollAmount,
+                    behavior: 'smooth'
+                });
+            }
+        }
+    </script>
 
     <style>
         .scrollbar-hide::-webkit-scrollbar {
@@ -490,7 +523,6 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-    </style>
     </style>
     <section class="py-24 px-4 bg-dark-950 relative z-10 transition-colors duration-500 overflow-hidden">
         <div class="absolute inset-0 z-0">
